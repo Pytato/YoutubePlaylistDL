@@ -3,7 +3,7 @@ import logging
 import pafy
 import os
 import time
-import wget
+from urllib import request
 from datetime import datetime
 
 external_logger = logging.getLogger('PlaylistDL.core.audio')
@@ -68,14 +68,11 @@ class AudioDL:
                                                                          format="%d-%m-%y_%H%M%S"))
         os.mkdir("./Downloads/"+download_folder_name)
         for title, dl_url in url_dict.items():
-            self.audioDL_logger.info("Now downloading "+title+".")
+            print("Now downloading "+title+".")
             time.sleep(0.25)
             safe_characters = (' ', '.', '_')
             file_title = "".join(c for c in title if c.isalnum() or c in safe_characters).rstrip()
-            try:
-                wget.download(url=dl_url, out="./Downloads/"+download_folder_name+"/"+file_title)
-            except:
-                self.audioDL_logger.exception("Download failed due to HTTP denial.")
-            self.audioDL_logger.info("Finished downloading "+title+".")
-        self.audioDL_logger.info("Finished downloading playlist:", pl_title,
-                                 "The downloaded files can be found in './Downloads/{}'.".format(download_folder_name))
+            request.urlretrieve(dl_url, filename="./Downloads/"+download_folder_name+"/"+file_title)
+            print("Finished downloading "+title+".")
+        print("Finished downloading playlist: {} The downloaded files can be found in './Downloads/{}'."
+                                 .format(pl_title, download_folder_name))
