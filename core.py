@@ -1,8 +1,10 @@
 # License stuff
 
-import pafy
 import logging
-import Operations.audio
+
+import pafy
+
+from audio import AudioDL
 
 core_logger = logging.getLogger("PlaylistDL.core")
 
@@ -40,20 +42,16 @@ def var_def():
     if download_quality != "High" and download_quality != "Low":
         print("Enter download quality correctly.")
         return()
-    elif download_quality == "Low":
-        print("Low quality is for losers.")
-        return()
 
     download_type = str(input("File-form to download from youtube (audio/video): "))
     if download_type.lower() == "audio":
-        pref_audio_type = str(input("Preferred audio file (ogg/m4a): "))
-        audiodl = Operations.audio.AudioDL()
+        pref_audio_type = str(input("Preferred audio file (ogg/m4a/webm): "))
+        audiodl = AudioDL()
         core_logger.debug("audioDL initialised.")
         if is_playlist is True:
             core_logger.debug("is_playlist = True")
-            audiodl.audio_playlist_dl(set=playlist_to_dl, fformat=pref_audio_type,
+            audiodl.audio_playlist_gather(set=playlist_to_dl, fformat=pref_audio_type,
                                       quality=download_quality)
-            core_logger.debug("Downloading function failed to start.")
         # dl_audio(video, fformat=pref_audio_type, quality=download_quality)
     # elif download_type.lower() == "video":
     #     dl_video(...)

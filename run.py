@@ -1,11 +1,11 @@
 # license stuff
 
-import time
 import logging
 import os
+import time
 from datetime import datetime
+
 import core
-import Operations.audio
 
 # Setup
 print("Starting PlaylistDL.\n\nChecking for missing paths.")
@@ -21,7 +21,7 @@ main_logger = logging.getLogger('PlaylistDL')
 main_logger.setLevel(logging.DEBUG)
 # Generate a standard format (save line room, PEP8 and sanity)
 log_formats = logging.Formatter("{} | [%(name)s] | [%(levelname)s] : %(message)s"\
-    .format(datetime.strftime(datetime.today(), format="[%d-%m-%y | %H:%M:%S]")))
+                                .format(datetime.strftime(datetime.today(), format="[%d-%m-%y | %H:%M:%S]")))
 # Set up the handler for stream
 stream_h = logging.StreamHandler()
 stream_h.setFormatter(log_formats)
