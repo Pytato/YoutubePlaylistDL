@@ -15,7 +15,7 @@ class AudioDL:
         self.audioDL_logger.debug("core.audio.audioDL initialised.")
         print("Test")
 
-    def audio_playlist_gather(self, set, fformat="", quality=""):
+    def audio_playlist_gather(self, set, fformat="mp3", quality=""):
         self.audioDL_logger.debug("core.audio.audioDL.audio_playlist_dl() started.")
         best_bitrates = {}
         time.sleep(0.2)
@@ -39,9 +39,10 @@ class AudioDL:
             while bitrate not in choices:
                 bitrate = int(input("Bitrate choices: {}\n\nEnter desired bitrate (higher number is higher quality): "
                                     .format(choices)))
-            self.audioDL_logger.info("Bitrate accepted, generating array of audio streams that have a closest match to choice")
+            self.audioDL_logger.info(
+                "Bitrate accepted, generating array of audio streams that have a closest match to choice")
             for video in set["items"]:
-                stream_qualitites = {}
+                stream_qualities = {}
                 # Iterate through the available audiostreams
                 test = video["pafy"].audiostreams
                 for stream in video["pafy"].audiostreams:
@@ -50,11 +51,11 @@ class AudioDL:
                         # Generate a friendly bitrate number
                         s_bitrate = int(stream.bitrate.replace("k", ""))
                         # And give it the key value of its bitrate with a URL to download from attached.
-                        stream_qualitites[s_bitrate] = stream.url
+                        stream_qualities[s_bitrate] = stream.url
                 # Find the closest bitrate available in the dictionary and get the URL attached,
                 # stick the URL in another array.
-                closest_bitrate = min(stream_qualitites, key=lambda x: abs(x-bitrate))
-                best_bitrates[video["pafy"].title+"."+fformat] = stream_qualitites[closest_bitrate]
+                closest_bitrate = min(stream_qualities, key=lambda x: abs(x-bitrate))
+                best_bitrates[video["pafy"].title+"."+fformat] = stream_qualities[closest_bitrate]
                 self.audioDL_logger.info("Found audio of '{0}' in quality, {1}k. Added to list."
                                          .format(video["pafy"].title, closest_bitrate))
             self.audioDL_logger.info("List generation complete.")
@@ -62,9 +63,30 @@ class AudioDL:
         else:
             self.audioDL_logger.error("Neither 'High' or 'Low' quality selected.")
 
-    def audio_single_gather(self, audio_url):
+    def audio_single_gather(self, audio_pafy, fformat, quality):
         self.audioDL_logger.debug("core.audio.audioDL.audio_single_gather() started.")
-
+        # High quality downloads are the simplest to do
+        if quality == "High":
+            self.audioDL_logger.info("Finding highest quality audio file in your chosen format.")
+            audio_pafy.getbestaudio(preftype=fformat)
+        elif quality == "Low":
+            choices = [96, 128, 160, 192, 256, 320]
+            bitrate = 0
+            while bitrate not in choices:
+                bitrate = int(input("Bitrate choices: {}\n\nEnter desired bitrate (higher number is higher quality): "
+                                    .format(choices)))
+            self.audioDL_logger.info(
+                "Bitrate accepted, generating array of audio streams that have a closest match to choice")
+            stream_qualities = {}
+            best_bitrates = {}
+            for stream in audio_pafy.audiostreams:
+                if stream.extension == fformat:
+                    stream_bitrate = (stream.bitrate.replace("k", ""))
+                    stream_qualities[stream_bitrate] = stream.url
+            closest_bitrate = min(stream_qualities, key=lambda x: abs(x - bitrate))
+            best_bitrates[audio_pafy.title + "." + fformat] = stream_qualities[closest_bitrate]
+            self.audioDL_logger.info("Found audio of '{0}' in quality, {1}k. Added to list."
+                                     .format(audio_pafy.title, closest_bitrate))
 
     def download_from_url(self, url_dict, pl_title):
         self.audioDL_logger.info("Downloading audio (may take some time).")
@@ -79,4 +101,4 @@ class AudioDL:
             request.urlretrieve(dl_url, filename="./Downloads/"+download_folder_name+"/"+file_title)
             print("Finished downloading "+title+".")
         print("Finished downloading playlist: {} The downloaded files can be found in './Downloads/{}'."
-                                 .format(pl_title, download_folder_name))
+              .format(pl_title, download_folder_name))

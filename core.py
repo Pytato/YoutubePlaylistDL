@@ -52,6 +52,6 @@ def var_def():
             core_logger.debug("is_playlist = True")
             audiodl.audio_playlist_gather(set=playlist_to_dl, fformat=pref_audio_type,
                                           quality=download_quality)
-        # dl_audio(video, fformat=pref_audio_type, quality=download_quality)
+        audiodl.audio_single_gather(video, fformat=pref_audio_type, quality=download_quality)
     # elif download_type.lower() == "video":
     #     dl_video(...)
