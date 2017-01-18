@@ -18,7 +18,7 @@ time.sleep(0.15)
 # Logging
 # Generate main logger
 main_logger = logging.getLogger('PlaylistDL')
-main_logger.setLevel(logging.DEBUG)
+main_logger.setLevel(logging.INFO)
 # Generate a standard format (save line room, PEP8 and sanity)
 log_formats = logging.Formatter("{} | [%(name)s] | [%(levelname)s] : %(message)s"\
                                 .format(datetime.strftime(datetime.today(), format="[%d-%m-%y | %H:%M:%S]")))

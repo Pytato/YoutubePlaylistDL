@@ -62,8 +62,12 @@ class AudioDL:
         else:
             self.audioDL_logger.error("Neither 'High' or 'Low' quality selected.")
 
+    def audio_single_gather(self, audio_url):
+        self.audioDL_logger.debug("core.audio.audioDL.audio_single_gather() started.")
+
+
     def download_from_url(self, url_dict, pl_title):
-        self.audioDL_logger.info("Downloading playlist (may take some time).")
+        self.audioDL_logger.info("Downloading audio (may take some time).")
         download_folder_name = pl_title+" [{}]".format(datetime.strftime(datetime.today(),
                                                                          format="%d-%m-%y_%H%M%S"))
         os.mkdir("./Downloads/"+download_folder_name)
