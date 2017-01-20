@@ -44,7 +44,6 @@ class AudioDL:
             for video in set["items"]:
                 stream_qualities = {}
                 # Iterate through the available audiostreams
-                test = video["pafy"].audiostreams
                 for stream in video["pafy"].audiostreams:
                     # If the stream is the right filetype, add the bitrate to the stream_qualitites array
                     if stream.extension == fformat:
@@ -76,17 +75,18 @@ class AudioDL:
                 bitrate = int(input("Bitrate choices: {}\n\nEnter desired bitrate (higher number is higher quality): "
                                     .format(choices)))
             self.audioDL_logger.info(
-                "Bitrate accepted, generating array of audio streams that have a closest match to choice")
+                "Bitrate accepted, finding closest quality stream to choice.")
             stream_qualities = {}
             best_bitrates = {}
             for stream in audio_pafy.audiostreams:
                 if stream.extension == fformat:
-                    stream_bitrate = (stream.bitrate.replace("k", ""))
+                    stream_bitrate = int(stream.bitrate.replace("k", ""))
                     stream_qualities[stream_bitrate] = stream.url
             closest_bitrate = min(stream_qualities, key=lambda x: abs(x - bitrate))
             best_bitrates[audio_pafy.title + "." + fformat] = stream_qualities[closest_bitrate]
             self.audioDL_logger.info("Found audio of '{0}' in quality, {1}k. Added to list."
                                      .format(audio_pafy.title, closest_bitrate))
+            self.download_from_url(best_bitrates, audio_pafy.title)
 
     def download_from_url(self, url_dict, pl_title):
         self.audioDL_logger.info("Downloading audio (may take some time).")
