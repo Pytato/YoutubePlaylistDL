@@ -18,7 +18,7 @@ def var_def():
         return()
 
     is_playlist = False
-    # Catch playlists
+    # Catch playlists, will be improved at some point to catch shortened URLs.
     if "playlist" in download_url:
         logging.info("Playlist URL recognised, verifying integrity.")
         try:
@@ -52,6 +52,11 @@ def var_def():
             core_logger.debug("is_playlist = True")
             audiodl.audio_playlist_gather(set=playlist_to_dl, fformat=pref_audio_type,
                                           quality=download_quality)
-        # dl_audio(video, fformat=pref_audio_type, quality=download_quality)
+        else:
+            audiodl.audio_single_gather(video, fformat=pref_audio_type, quality=download_quality)
     # elif download_type.lower() == "video":
     #     dl_video(...)
+
+
+def download_from_url(url_dict, folder_title):
+    print("Soon")
