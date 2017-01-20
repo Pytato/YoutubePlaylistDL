@@ -13,7 +13,6 @@ class AudioDL:
     def __init__(self):
         self.audioDL_logger = logging.getLogger("PlaylistDL.core.audio.audioDL")
         self.audioDL_logger.debug("core.audio.audioDL initialised.")
-        print("Test")
 
     def audio_playlist_gather(self, set, fformat="mp3", quality=""):
         self.audioDL_logger.debug("core.audio.audioDL.audio_playlist_dl() started.")
