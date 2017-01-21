@@ -4,11 +4,11 @@
 Very much a work in progress, recently started migrating it over to use more modular format ie. not having everything in one file.
 
 ##Installing and running
-1) Download the [latest release](https://github.com/Pytato/YoutubePlaylistDL/releases) of the program.
-2) Don't use Python 2.
-3) Install [pafy](http://np1.github.io/pafy/) using `pip install pafy`.
-4) Install [yt-dl](https://github.com/rg3/youtube-dl/) using `pip install youtube-dl`.
-5) Open the zip and run `run.py` to begin.
+1. Download the [latest release](https://github.com/Pytato/YoutubePlaylistDL/releases) of the program.
+2. Don't use Python 2.
+3. Install [pafy](http://np1.github.io/pafy/) using `pip install pafy`.
+4. Install [yt-dl](https://github.com/rg3/youtube-dl/) using `pip install youtube-dl`.
+5. Open the zip and run `run.py` to begin.
 
 ##Checklist
 - [x] Modularise the code into separate areas
