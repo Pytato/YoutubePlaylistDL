@@ -12,13 +12,11 @@ Very much a work in progress, recently started migrating it over to use more mod
 
 ##Checklist
 - [x] Modularise the code into separate areas
-    - [ ] WIP - make sure logging works completely.
-        - [ ] Find a way to suppress logging errors due to non-conforming characters in video names.
 - [x] Give option to download single audio file.
 - [ ] Allow video downloads.
-- [ ] Add user config options.
-- [ ] Fix the damned bug that has been plaguing low quality audio downloads.
-    - [x] Fixed to the best of my knowledge.
+    - [x] WIP
+- [x] Add user config options.
+- [x] Fix the damned bug that has been plaguing low quality audio downloads.
 - [ ] Get video downloads working.
 - [ ] Implement GUI interface. 
 - [ ] Try integrating the program online (will publish results).
