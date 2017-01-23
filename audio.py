@@ -93,11 +93,11 @@ class AudioDL:
                                                                          format="%d-%m-%y_%H%M%S"))
         os.mkdir("./Downloads/"+download_folder_name)
         for title, dl_url in url_dict.items():
-            print("Now downloading "+title+".")
-            time.sleep(0.25)
             safe_characters = (' ', '.', '_')
             file_title = "".join(c for c in title if c.isalnum() or c in safe_characters).rstrip()
+            print("Now downloading "+file_title+".")
+            time.sleep(0.25)
             request.urlretrieve(dl_url, filename="./Downloads/"+download_folder_name+"/"+file_title)
-            print("Finished downloading "+title+".")
+            print("Finished downloading "+file_title+".")
         print("Finished downloading playlist: {} The downloaded files can be found in './Downloads/{}'."
               .format(pl_title, download_folder_name))
