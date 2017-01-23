@@ -17,7 +17,6 @@ Very much a work in progress, recently started migrating it over to use more mod
     - [x] WIP
 - [x] Add user config options.
 - [x] Fix the damned bug that has been plaguing low quality audio downloads.
-- [ ] Get video downloads working.
 - [ ] Implement GUI interface. 
 - [ ] Try integrating the program online (will publish results).
 
