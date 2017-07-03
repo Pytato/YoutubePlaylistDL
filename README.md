@@ -1,4 +1,4 @@
-# YoutubePlaylistDL v0.0.xa
+# YoutubePlaylistDL v0.0.RIP (Is borked atm)
 *"Python to sit on top of Python to sit on top of other Python, will download playlists from youtube in audio or video with numerous formats."*
 
 Very much a work in progress, recently started migrating it over to use more modular format ie. not having everything in one file.
@@ -17,7 +17,7 @@ Very much a work in progress, recently started migrating it over to use more mod
     - [x] WIP
 - [x] Add user config options.
 - [x] Fix the damned bug that has been plaguing low quality audio downloads.
-- [ ] Implement GUI interface. 
+- [ ] Implement GUI interface (ended up working locally, local version similar to another repo I did seperately. 
 - [ ] Try integrating the program online (will publish results).
 
 *Will attempt to keep updated as the program gets updated.*
